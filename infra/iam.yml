@@ -62,6 +62,15 @@ Resources:
               - 'ecr:BatchGetImage'
               - 'ecr:GetDownloadUrlForLayer'
             Resource: '*'
+            
+  EC2RoleInstanceProfile:    
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      InstanceProfileName: !Sub "${EnvironmentName}-instance-profile"
+      Path: "/"
+      Roles: 
+        - 
+          Ref: "EC2Role"
 
   ECSRole:
     Type: AWS::IAM::Role
@@ -136,12 +145,17 @@ Outputs:
     Description: The ARN of the ECS role
     Value: !GetAtt 'ECSRole.Arn'
     Export:
-      Name: !Sub ${EnvironmentName}:ECSRole
+      Name: !Sub ${EnvironmentName}:ECSRole  
   EC2Role:
     Description: The ARN of the EC2 role
     Value: !GetAtt 'EC2Role.Arn'
     Export:
       Name: !Sub ${EnvironmentName}:EC2Role
+  EC2InstanceProfileRole:
+    Description: The ARN of the Instance Profile role
+    Value: !GetAtt 'EC2RoleInstanceProfile.Arn'
+    Export:
+      Name: !Sub ${EnvironmentName}:EC2InstanceProfileRole
   ECSTaskExecutionRole:
     Description: The ARN of the ECS role
     Value: !GetAtt 'ECSTaskExecutionRole.Arn'
