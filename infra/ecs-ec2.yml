@@ -80,7 +80,7 @@ Resources:
     Type: AWS::IAM::InstanceProfile
     Properties:
       Path: /
-      Roles: [ 'ecs-demo-ec2-role' ] # this role was created manually so name has to be verified as per creation
+      Roles: [ 'ecs-demo-ec2-role' ] # This role name has to be provided carefully as per the naming conventions of role
  
 
 Outputs:
