@@ -70,6 +70,7 @@ Resources:
       SecurityGroups: [!Ref 'ContainerSecurityGroup']
       InstanceType: !Ref 'InstanceType'
       IamInstanceProfile: !Ref 'EC2InstanceProfile'
+      KeyName: 'ecs-demo'      
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash -xe
