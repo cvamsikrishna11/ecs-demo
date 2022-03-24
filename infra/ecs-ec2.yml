@@ -44,6 +44,12 @@ Resources:
       GroupDescription: Access to the ECS hosts that run containers
       VpcId: 
         Fn::ImportValue: !Sub ${EnvironmentName}:VpcId
+      SecurityGroupIngress:
+      - IpProtocol: "-1"
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: "-1"
+        CidrIp: 0.0.0.0/0
 
   # Autoscaling group. This launches the actual EC2 instances that will register
   # themselves as members of the cluster, and run the docker containers.
