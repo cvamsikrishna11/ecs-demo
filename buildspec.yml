@@ -36,4 +36,8 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$TAG      
       - echo "Docker Image Push to ECR Completed -  $REPOSITORY_URI:$TAG & $REPOSITORY_URI:latest"      
-      
+      # The name as has to be same as the container name the task definition
+      - printf '[{"name":"ecs-demo-fargate-container","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > imagedefinitions.json  
+
+artifacts:
+  files: imagedefinitions.json
